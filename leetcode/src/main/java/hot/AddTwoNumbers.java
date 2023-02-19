@@ -51,16 +51,4 @@ public class AddTwoNumbers {
 
         return result.next;
     }
-
-    static class ListNode {
-        int val;
-        ListNode next;
-
-        public ListNode() {
-        }
-
-        public ListNode(int val) {
-            this.val = val;
-        }
-    }
 }
