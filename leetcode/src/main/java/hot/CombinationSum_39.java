@@ -10,7 +10,7 @@ import java.util.List;
  **/
 public class CombinationSum_39 {
     public static void main(String[] args) {
-        System.out.println(combinationSum(new int[]{2,3,6,7}, 7));
+       quickSort(new int[]{2,1},0,1);
     }
 
     public static List<List<Integer>> combinationSum(int[] candidates, int target) {
