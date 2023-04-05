@@ -14,8 +14,43 @@ public class FindTargetSumWays_494 {
         System.out.println(findTargetSumWays(new int[]{1, 1, 1, 1, 1}, 3));
     }
 
+    /**
+     * 最小~最大
+     * dp 关心数组第二维是什么
+     * @param nums
+     * @param target
+     * @return
+     */
     public static int findTargetSumWays(int[] nums, int target) {
-        return (int) find(nums, 0).stream().filter(x -> target == x).count();
+        int max = 0, min = 0;
+        for (int i : nums) {
+            if (i > 0) {
+                max += i;
+                min -= i;
+            } else {
+                max -= i;
+                min += i;
+            }
+        }
+
+        int len = nums.length;
+        int[][] dp = new int[len][max - min + 1];
+        dp[0][nums[0] - min] += 1;
+        dp[0][-nums[0] - min] += 1;
+
+        if (target > max || target < min) {
+            return 0;
+        }
+        for (int i = 1; i < len; i++) {
+            for (int j = min; j <= max; j++) {
+                if (dp[i - 1][j - min] > 0) {
+                    dp[i][j - min + nums[i]] += dp[i - 1][j - min];
+                    dp[i][j - min - nums[i]] += dp[i - 1][j - min];
+                }
+            }
+        }
+
+        return dp[len - 1][target - min];
     }
 
     public static List<Integer> find(int[] nums, int index) {
